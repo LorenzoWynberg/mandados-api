@@ -83,4 +83,39 @@ class SanctumTokenFlowTest extends TestCase
               'email' => 'test@example.com',
           ]);
     }
+
+    /**
+     * Test that the issued token can be used to logout.
+     */
+    public function test_logout_revokes_token(): void
+    {
+        // Issue an API token.
+        $response = $this->postJson('/api/sanctum/token', [
+            'email'       => 'test@example.com',
+            'password'    => 'password',
+            'device_name' => 'PHPUnit',
+        ]);
+
+        $token = $response->json('token');
+
+        // Logout using the token.
+        $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept'        => 'application/json',
+        ])->postJson('/api/sanctum/logout')
+          ->assertStatus(200)
+          ->assertJson([
+              'message' => 'Logged out successfully',
+          ]);
+
+        // Refresh the application so that the authentication context is reset.
+        $this->refreshApplication();
+
+        // Subsequent request with the same token should be unauthorized.
+        $this->withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept'        => 'application/json',
+        ])->getJson('/api/user')
+          ->assertStatus(401);
+    }
 }

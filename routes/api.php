@@ -26,6 +26,11 @@ Route::post('/sanctum/token', function (Request $request) {
     return ['token' => $user->createToken($request->device_name)->plainTextToken];
 });
 
+Route::post('/sanctum/logout', function (Request $request) {
+    $request->user()->currentAccessToken()->delete();
+    return response()->json(['message' => 'Logged out successfully']);
+})->middleware('auth:sanctum');
+
 // User
 Route::get('/user', function (Request $request) {
     return $request->user();
