@@ -15,7 +15,6 @@ class RolePermissionTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        // Seed default roles and permissions.
         $this->seed(RolesAndPermissionsSeeder::class);
     }
 
@@ -37,36 +36,5 @@ class RolePermissionTest extends TestCase
         $user->givePermissionTo('create orders');
         // Assert the user has the permission.
         $this->assertTrue($user->hasPermissionTo('create orders'));
-    }
-
-    public function test_hotel_role_has_correct_permissions(): void
-    {
-        // Retrieve the "hotel" role.
-        $hotel = Role::findByName('hotel');
-        // Get the permissions as an array.
-        $permissions = $hotel->permissions->pluck('name')->sort()->values()->all();
-        $expected = ['approve quotations', 'create orders', 'delete orders', 'edit orders'];
-        sort($expected);
-        $this->assertEquals($expected, $permissions);
-    }
-
-    public function test_admin_role_has_correct_permissions(): void
-    {
-        // Retrieve the "admin" role.
-        $admin = Role::findByName('admin');
-        $permissions = $admin->permissions->pluck('name')->sort()->values()->all();
-        $expected = ['assign routes', 'delete orders', 'edit orders', 'generate invoices'];
-        sort($expected);
-        $this->assertEquals($expected, $permissions);
-    }
-
-    public function test_driver_role_has_correct_permissions(): void
-    {
-        // Retrieve the "driver" role.
-        $driver = Role::findByName('driver');
-        $permissions = $driver->permissions->pluck('name')->sort()->values()->all();
-        $expected = ['update delivery status'];
-        sort($expected);
-        $this->assertEquals($expected, $permissions);
     }
 }

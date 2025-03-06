@@ -12,35 +12,57 @@ class RolesAndPermissionsSeederTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_roles_and_permissions_are_seeded(): void
+    protected function setUp(): void
     {
+        parent::setUp();
         $this->seed(RolesAndPermissionsSeeder::class);
+    }
 
+    public function test_roles_exist(): void
+    {
         $this->assertDatabaseHas('roles', ['name' => 'hotel']);
         $this->assertDatabaseHas('roles', ['name' => 'admin']);
         $this->assertDatabaseHas('roles', ['name' => 'driver']);
+    }
 
+    public function test_permissions_exist(): void
+    {
         $this->assertDatabaseHas('permissions', ['name' => 'create orders']);
+        $this->assertDatabaseHas('permissions', ['name' => 'approve quotations']);
         $this->assertDatabaseHas('permissions', ['name' => 'edit orders']);
         $this->assertDatabaseHas('permissions', ['name' => 'delete orders']);
-        $this->assertDatabaseHas('permissions', ['name' => 'approve quotations']);
         $this->assertDatabaseHas('permissions', ['name' => 'assign routes']);
-        $this->assertDatabaseHas('permissions', ['name' => 'update delivery status']);
         $this->assertDatabaseHas('permissions', ['name' => 'generate invoices']);
+        $this->assertDatabaseHas('permissions', ['name' => 'update delivery status']);
+    }
 
+    public function test_hotel_role_has_correct_permissions(): void
+    {
         $hotel = Role::findByName('hotel');
-        $this->assertTrue($hotel->hasPermissionTo('create orders'));
-        $this->assertTrue($hotel->hasPermissionTo('edit orders'));
-        $this->assertTrue($hotel->hasPermissionTo('delete orders'));
-        $this->assertTrue($hotel->hasPermissionTo('approve quotations'));
+        $expected = ['create orders', 'approve quotations', 'edit orders', 'delete orders'];
+        $actual = $hotel->permissions->pluck('name')->sort()->values()->all();
 
+        sort($expected);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function test_admin_role_has_correct_permissions(): void
+    {
         $admin = Role::findByName('admin');
-        $this->assertTrue($admin->hasPermissionTo('assign routes'));
-        $this->assertTrue($admin->hasPermissionTo('edit orders'));
-        $this->assertTrue($admin->hasPermissionTo('delete orders'));
-        $this->assertTrue($admin->hasPermissionTo('generate invoices'));
+        $expected = ['assign routes', 'generate invoices', 'edit orders', 'delete orders'];
+        $actual = $admin->permissions->pluck('name')->sort()->values()->all();
 
+        sort($expected);
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function test_driver_role_has_correct_permissions(): void
+    {
         $driver = Role::findByName('driver');
-        $this->assertTrue($driver->hasPermissionTo('update delivery status'));
+        $expected = ['update delivery status'];
+        $actual = $driver->permissions->pluck('name')->sort()->values()->all();
+
+        sort($expected);
+        $this->assertEquals($expected, $actual);
     }
 }
