@@ -21,6 +21,8 @@ class RolesAndPermissionsSeeder extends Seeder
         // Create permissions.
         $permissions = [
             'create orders',
+            'edit orders',
+            'delete orders',
             'approve quotations',
             'assign routes',
             'update delivery status',
@@ -33,10 +35,10 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // Create roles and assign permissions.
         $hotelRole = Role::create(['name' => 'hotel']);
-        $hotelRole->givePermissionTo(['create orders', 'approve quotations']);
+        $hotelRole->givePermissionTo(['create orders', 'approve quotations', 'edit orders', 'delete orders']);
 
         $adminRole = Role::create(['name' => 'admin']);
-        $adminRole->givePermissionTo(['assign routes', 'generate invoices']);
+        $adminRole->givePermissionTo(['assign routes', 'generate invoices', 'edit orders', 'delete orders']);
 
         $driverRole = Role::create(['name' => 'driver']);
         $driverRole->givePermissionTo(['update delivery status']);
