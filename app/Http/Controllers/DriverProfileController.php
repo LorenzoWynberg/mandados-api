@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\DriverProfile;
 use App\Http\Requests\StoreDriverProfileRequest;
 use App\Http\Requests\UpdateDriverProfileRequest;
-use App\Models\DriverProfile;
 
 class DriverProfileController extends Controller
 {
@@ -13,7 +14,7 @@ class DriverProfileController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(DriverProfile::all());
     }
 
     /**
@@ -29,16 +30,19 @@ class DriverProfileController extends Controller
      */
     public function store(StoreDriverProfileRequest $request)
     {
-        //
+        $data = $request->validated();
+        $user = User::createAsDriver($data);
+        return response()->json($user->driverProfile, 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(DriverProfile $driverProfile)
+    public function show(DriverProfile $driver_profile)
     {
-        //
+        return response()->json($driver_profile);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -51,16 +55,27 @@ class DriverProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDriverProfileRequest $request, DriverProfile $driverProfile)
+    public function update(UpdateDriverProfileRequest $request, DriverProfile $driver_profile)
     {
-        //
+        $data = $request->validated();
+        $driver_profile->updateWithUser($data);
+
+        return response()->json([
+            'user'    => $driver_profile->user,
+            'profile' => $driver_profile,
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DriverProfile $driverProfile)
+    public function destroy(DriverProfile $driver_profile)
     {
-        //
+        $driver_profile->update(['active' => false]);
+        $driver_profile->delete();
+        $driver_profile->user->update(['active' => false]);
+        $driver_profile->user->delete();
+
+        return response()->json(null, 204);
     }
 }
