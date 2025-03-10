@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('driver_profiles', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('license_number');
+            $table->string('license_plate_number');
+            $table->string('license_photo_front');
+            $table->string('license_photo_back');
+            $table->date('date_of_birth');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
