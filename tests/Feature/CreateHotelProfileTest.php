@@ -4,11 +4,18 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\User;
+use Database\Seeders\RolesAndPermissionsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CreateHotelProfileTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed(RolesAndPermissionsSeeder::class);
+    }
 
     public function test_create_hotel_profile_and_assigns_hotel_role(): void
     {

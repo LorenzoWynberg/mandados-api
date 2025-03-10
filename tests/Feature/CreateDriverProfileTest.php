@@ -4,11 +4,18 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Models\User;
+use Database\Seeders\RolesAndPermissionsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CreateDriverProfileTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed(RolesAndPermissionsSeeder::class);
+    }
 
     public function test_create_driver_profile_and_assigns_driver_role(): void
     {
