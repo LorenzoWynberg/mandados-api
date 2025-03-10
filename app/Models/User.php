@@ -78,6 +78,8 @@ class User extends Authenticatable
             'sex'      => $data['sex'],
         ]);
 
+        $user->assignRole('driver');
+
         DriverProfile::create([
             'user_id'                => $user->id,
             'license_number'         => $data['license_number'],
@@ -106,6 +108,8 @@ class User extends Authenticatable
             'avatar'   => $data['avatar'],
             'sex'      => $data['sex'],
         ]);
+
+        $user->assignRole('hotel');
 
         HotelProfile::create([
             'user_id'    => $user->id,
