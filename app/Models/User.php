@@ -50,4 +50,38 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function driverProfile()
+    {
+        return $this->hasOne(DriverProfile::class);
+    }
+
+    /**
+     * Create a new user as a driver along with its associated driver profile.
+     *
+     * @param array $data Validated data from the request.
+     * @return static
+     */
+    public static function createAsDriver(array $data): self
+    {
+        $user = self::create([
+            'name'     => $data['name'],
+            'email'    => $data['email'],
+            'password' => bcrypt($data['password']),
+            'phone'    => $data['phone'],
+            'avatar'   => $data['avatar'],
+            'sex'      => $data['sex'],
+        ]);
+
+        DriverProfile::create([
+            'user_id'                => $user->id,
+            'license_number'         => $data['license_number'],
+            'license_plate_number'   => $data['license_plate_number'],
+            'license_photo_front'    => $data['license_photo_front'],
+            'license_photo_back'     => $data['license_photo_back'],
+            'date_of_birth'          => $data['date_of_birth'],
+        ]);
+
+        return $user;
+    }
 }
