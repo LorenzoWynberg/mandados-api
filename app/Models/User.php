@@ -56,6 +56,11 @@ class User extends Authenticatable
         return $this->hasOne(DriverProfile::class);
     }
 
+    public function hotelProfile()
+    {
+        return $this->hasOne(HotelProfile::class);
+    }
+
     /**
      * Create a new user as a driver along with its associated driver profile.
      *
@@ -80,6 +85,37 @@ class User extends Authenticatable
             'license_photo_front'    => $data['license_photo_front'],
             'license_photo_back'     => $data['license_photo_back'],
             'date_of_birth'          => $data['date_of_birth'],
+        ]);
+
+        return $user;
+    }
+
+    /**
+     * Create a new user as a hotel along with its associated hotel profile.
+     *
+     * @param array $data Validated data from the request.
+     * @return static
+     */
+    public static function createAsHotel(array $data): self
+    {
+        $user = self::create([
+            'name'     => $data['name'],
+            'email'    => $data['email'],
+            'password' => bcrypt($data['password']),
+            'phone'    => $data['phone'],
+            'avatar'   => $data['avatar'],
+            'sex'      => $data['sex'],
+        ]);
+
+        HotelProfile::create([
+            'user_id'    => $user->id,
+            'hotel_name' => $data['hotel_name'],
+            'address'    => $data['address'],
+            'city'       => $data['city'],
+            'province'   => $data['province'],
+            'country'    => $data['country'] ?? 'Costa Rica',
+            'latitude'   => $data['latitude'],
+            'longitude'  => $data['longitude'],
         ]);
 
         return $user;
