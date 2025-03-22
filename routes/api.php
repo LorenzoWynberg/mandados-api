@@ -24,7 +24,9 @@ Route::post('/sanctum/token', function (Request $request) {
         ]);
     }
 
-    return ['token' => $user->createToken($request->device_name)->plainTextToken];
+    return response()->json([
+        'token' => $user->createToken($request->device_name)->plainTextToken,
+    ]);
 });
 
 Route::post('/sanctum/logout', function (Request $request) {
@@ -34,9 +36,9 @@ Route::post('/sanctum/logout', function (Request $request) {
 
 // User
 Route::get('/user', function (Request $request) {
-    return $request->user();
+    return response()->json($request->user());
 })->middleware('auth:sanctum');
 
-//Profiles
+// Profiles
 Route::apiResource('driver_profiles', DriverProfileController::class);
 Route::apiResource('hotel_profiles', HotelProfileController::class);
