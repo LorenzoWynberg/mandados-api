@@ -5,7 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
-
+use App\Http\Controllers\DriverProfileController;
+use App\Http\Controllers\HotelProfileController;
 
 // Sanctum
 Route::post('/sanctum/token', function (Request $request) {
@@ -35,3 +36,7 @@ Route::post('/sanctum/logout', function (Request $request) {
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+
+//Profiles
+Route::apiResource('driver_profiles', DriverProfileController::class);
+Route::apiResource('hotel_profiles', HotelProfileController::class);

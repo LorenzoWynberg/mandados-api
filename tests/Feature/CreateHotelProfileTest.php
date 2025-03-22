@@ -1,0 +1,51 @@
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use App\Models\User;
+use Database\Seeders\RolesAndPermissionsSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+class CreateHotelProfileTest extends TestCase
+{
+    use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed(RolesAndPermissionsSeeder::class);
+    }
+
+    public function test_create_hotel_profile_and_assigns_hotel_role(): void
+    {
+        $payload = [
+            'name'         => 'Hotel One',
+            'email'        => 'hotel1@example.com',
+            'password'     => 'secret123',
+            'phone'        => '+506 9876-5432',
+            'avatar'       => 'https://via.placeholder.com/150',
+            'sex'          => 'female',
+            'hotel_name'   => 'Costa Rica Inn',
+            'address'      => '123 Main St',
+            'city'         => 'San José',
+            'province'     => 'San José',
+            'country'      => 'Costa Rica',
+            'latitude'     => 9.9281,
+            'longitude'    => -84.0907,
+        ];
+
+        $response = $this->postJson('/api/hotel_profiles', $payload);
+        $response->assertStatus(201);
+
+        // Retrieve the created user by email.
+        $user = User::where('email', $payload['email'])->first();
+        $this->assertNotNull($user);
+
+        // Verify that the user has the 'hotel' role.
+        $this->assertTrue($user->hasRole('hotel'));
+
+        // Verify the associated hotel profile.
+        $this->assertEquals('Costa Rica Inn', $user->hotelProfile->hotel_name);
+    }
+}

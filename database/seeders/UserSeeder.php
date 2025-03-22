@@ -11,10 +11,12 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        User::create([
-            'name' => 'Testing User',
+        User::factory()->create([
+            'name'  => 'Testing User',
             'email' => 'test@example.com',
-            'password' => Hash::make('password'),
+            'password' => bcrypt('password'),
+            'phone' => '+506 1234-5678',
+            'sex' => 'male',
         ]);
     }
 }
