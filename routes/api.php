@@ -4,10 +4,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CatalogController;
 use Illuminate\Validation\ValidationException;
-use App\Http\Controllers\DriverProfileController;
 use App\Http\Controllers\HotelProfileController;
+use App\Http\Controllers\DriverProfileController;
 
 // Public route for token creation
 Route::post('/sanctum/token', function (Request $request) {
