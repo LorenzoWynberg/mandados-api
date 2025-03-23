@@ -4,11 +4,12 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CatalogController;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\DriverProfileController;
 use App\Http\Controllers\HotelProfileController;
 
-// Sanctum
+// Public route for token creation
 Route::post('/sanctum/token', function (Request $request) {
     $request->validate([
         'email'       => 'required|email',
@@ -29,16 +30,19 @@ Route::post('/sanctum/token', function (Request $request) {
     ]);
 });
 
-Route::post('/sanctum/logout', function (Request $request) {
-    $request->user()->currentAccessToken()->delete();
-    return response()->json(['message' => 'Logged out successfully']);
-})->middleware('auth:sanctum');
+// Group routes that require Sanctum authentication
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/sanctum/logout', function (Request $request) {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(['message' => 'Logged out successfully']);
+    });
 
-// User
-Route::get('/user', function (Request $request) {
-    return response()->json($request->user());
-})->middleware('auth:sanctum');
+    // User
+    Route::get('/user', function (Request $request) {
+        return response()->json($request->user());
+    });
 
-// Profiles
-Route::apiResource('driver_profiles', DriverProfileController::class);
-Route::apiResource('hotel_profiles', HotelProfileController::class);
+    // Profiles
+    Route::apiResource('driver_profiles', DriverProfileController::class);
+    Route::apiResource('hotel_profiles', HotelProfileController::class);
+});
