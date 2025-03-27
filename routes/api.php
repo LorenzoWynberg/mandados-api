@@ -31,6 +31,13 @@ Route::post('/sanctum/token', function (Request $request) {
     ]);
 });
 
+Route::get('/get-locale', function () {
+    return response()->json(['locale' => app()->getLocale()]);
+});
+
+Route::post('/driver_profiles', [DriverProfileController::class, 'store']);
+Route::post('/hotel_profiles', [HotelProfileController::class, 'store']);
+
 // Group routes that require Sanctum authentication
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/sanctum/logout', function (Request $request) {
@@ -47,8 +54,8 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     // Profiles
-    Route::apiResource('driver_profiles', DriverProfileController::class);
-    Route::apiResource('hotel_profiles', HotelProfileController::class);
+    Route::apiResource('driver_profiles', DriverProfileController::class)->except('store');
+    Route::apiResource('hotel_profiles', HotelProfileController::class)->except('store');
 
     // Catalogs
     Route::apiResource('catalogs', CatalogController::class);

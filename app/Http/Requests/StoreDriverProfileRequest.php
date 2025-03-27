@@ -27,7 +27,7 @@ class StoreDriverProfileRequest extends FormRequest
             'password' => 'required|string|min:6',
             'phone' => 'required|string',
             'avatar' => 'required|url',
-            'sex' => 'required|in:male,female,unspecified',
+            'sex_id' => 'required|integer',
             'license_number' => [
                 'required',
                 'string',

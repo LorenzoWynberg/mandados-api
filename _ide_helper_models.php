@@ -15,21 +15,35 @@ namespace App\Models{
 /**
  * 
  *
+ * @property array $name
+ * @method string getTranslation(string $field, string $locale, bool $fallback = true)
+ * @property int $id
+ * @property string $code
+ * @property array<array-key, mixed>|null $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CatalogElement> $elements
  * @property-read int|null $elements_count
  * @property-read mixed $translations
  * @method static \Database\Factories\CatalogFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Catalog newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Catalog newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Catalog onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Catalog query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Catalog whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Catalog whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Catalog whereLocale(string $column, string $locale)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Catalog whereLocales(string $column, array $locales)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Catalog withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Catalog withoutTrashed()
- * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog whereLocale(string $column, string $locale)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog whereLocales(string $column, array $locales)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\Catalog withoutTrashed()
  */
 	class Catalog extends \Eloquent {}
 }
@@ -38,20 +52,40 @@ namespace App\Models{
 /**
  * 
  *
- * @property-read \App\Models\Catalog|null $catalog
+ * @property array $name
+ * @method string getTranslation(string $field, string $locale, bool $fallback = true)
+ * @property int $id
+ * @property int $catalog_id
+ * @property string $code
+ * @property array<array-key, mixed>|null $description
+ * @property int|null $order
+ * @property array<array-key, mixed>|null $meta
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Catalog $catalog
  * @property-read mixed $translations
  * @method static \Database\Factories\CatalogElementFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CatalogElement newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CatalogElement newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CatalogElement onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CatalogElement query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CatalogElement whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CatalogElement whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CatalogElement whereLocale(string $column, string $locale)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CatalogElement whereLocales(string $column, array $locales)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CatalogElement withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|CatalogElement withoutTrashed()
- * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement whereCatalogId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement whereLocale(string $column, string $locale)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement whereLocales(string $column, array $locales)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement whereMeta($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\CatalogElement withoutTrashed()
  */
 	class CatalogElement extends \Eloquent {}
 }
@@ -60,6 +94,7 @@ namespace App\Models{
 /**
  * 
  *
+ * @property User $user
  * @property int $id
  * @property int $user_id
  * @property string $license_number
@@ -70,25 +105,23 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\User $user
  * @method static \Database\Factories\DriverProfileFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DriverProfile newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DriverProfile newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DriverProfile onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DriverProfile query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DriverProfile whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DriverProfile whereDateOfBirth($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DriverProfile whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DriverProfile whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DriverProfile whereLicenseNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DriverProfile whereLicensePhotoBack($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DriverProfile whereLicensePhotoFront($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DriverProfile whereLicensePlateNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DriverProfile whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DriverProfile whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DriverProfile withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|DriverProfile withoutTrashed()
- * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DriverProfile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DriverProfile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DriverProfile onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DriverProfile query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DriverProfile whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DriverProfile whereDateOfBirth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DriverProfile whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DriverProfile whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DriverProfile whereLicenseNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DriverProfile whereLicensePhotoBack($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DriverProfile whereLicensePhotoFront($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DriverProfile whereLicensePlateNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DriverProfile whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DriverProfile whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DriverProfile withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\DriverProfile withoutTrashed()
  */
 	class DriverProfile extends \Eloquent {}
 }
@@ -97,6 +130,7 @@ namespace App\Models{
 /**
  * 
  *
+ * @property User $user
  * @property int $id
  * @property int $user_id
  * @property string $hotel_name
@@ -110,28 +144,26 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\User $user
  * @method static \Database\Factories\HotelProfileFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile whereActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile whereAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile whereCity($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile whereCountry($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile whereHotelName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile whereLatitude($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile whereLongitude($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile whereProvince($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|HotelProfile withoutTrashed()
- * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile whereCountry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile whereHotelName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile whereLatitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile whereLongitude($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile whereProvince($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\HotelProfile withoutTrashed()
  */
 	class HotelProfile extends \Eloquent {}
 }
@@ -147,7 +179,8 @@ namespace App\Models{
  * @property string $password
  * @property string $phone
  * @property string $avatar
- * @property \App\Models\CatalogElement|null $sex
+ * @property string $language_code
+ * @property int|null $sex_id
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -160,32 +193,33 @@ namespace App\Models{
  * @property-read int|null $permissions_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Role> $roles
  * @property-read int|null $roles_count
+ * @property-read \App\Models\CatalogElement|null $sex
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User permission($permissions, $without = false)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User role($roles, $guard = null, $without = false)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereAvatar($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereEmailVerifiedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePassword($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereSex($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutPermission($permissions)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutRole($roles, $guard = null)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
- * @mixin \Eloquent
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User permission($permissions, $without = false)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User role($roles, $guard = null, $without = false)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereLanguageCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereSexId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User withoutPermission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User withoutRole($roles, $guard = null)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|\App\Models\User withoutTrashed()
  */
 	class User extends \Eloquent {}
 }

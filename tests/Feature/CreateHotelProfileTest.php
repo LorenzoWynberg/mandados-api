@@ -2,9 +2,11 @@
 
 namespace Tests\Feature;
 
-use App\Models\User;
-use Database\Seeders\RolesAndPermissionsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Database\Seeders\RolesAndPermissionsSeeder;
+use Database\Seeders\CatalogSeeder;
+use App\Models\CatalogElement;
+use App\Models\User;
 use Tests\TestCase;
 
 class CreateHotelProfileTest extends TestCase
@@ -15,17 +17,23 @@ class CreateHotelProfileTest extends TestCase
     {
         parent::setUp();
         $this->seed(RolesAndPermissionsSeeder::class);
+        $this->seed(CatalogSeeder::class);
     }
 
     public function test_create_hotel_profile_and_assigns_hotel_role(): void
     {
+        /** @var CatalogElement|null $randomSex */
+        $randomSex = CatalogElement::whereHas('catalog', function ($query) {
+            $query->where('code', 'sex');
+        })->inRandomOrder()->first();
+
         $payload = [
             'name' => 'Hotel One',
             'email' => 'hotel1@example.com',
             'password' => 'secret123',
             'phone' => '+506 9876-5432',
             'avatar' => 'https://via.placeholder.com/150',
-            'sex' => 'female',
+            'sex_id' => $randomSex?->id,
             'hotel_name' => 'Costa Rica Inn',
             'address' => '123 Main St',
             'city' => 'San José',

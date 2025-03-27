@@ -55,8 +55,8 @@ class HotelProfile extends Model
         if (isset($data['avatar'])) {
             $userData['avatar'] = $data['avatar'];
         }
-        if (isset($data['sex'])) {
-            $userData['sex'] = $data['sex'];
+        if (isset($data['sex_id'])) {
+            $userData['sex_id'] = $data['sex_id'];
         }
 
         if (! empty($userData)) {

@@ -30,7 +30,7 @@ class UpdateDriverProfileRequest extends FormRequest
             'password' => 'sometimes|required|string|min:6',
             'phone' => 'sometimes|required|string',
             'avatar' => 'sometimes|required|url',
-            'sex' => 'sometimes|required|in:male,female,unspecified',
+            'sex_id' => 'sometimes|required|integer',
             'license_number' => [
                 'sometimes',
                 'required',

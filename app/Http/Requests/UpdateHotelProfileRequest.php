@@ -29,7 +29,7 @@ class UpdateHotelProfileRequest extends FormRequest
             'password' => 'sometimes|required|string|min:6',
             'phone' => 'sometimes|required|string',
             'avatar' => 'sometimes|required|url',
-            'sex_id' => 'sometimes|required|in:male,female,unspecified',
+            'sex_id' => 'sometimes|required|integer',
             'hotel_name' => 'sometimes|required|string|max:255',
             'address' => 'sometimes|required|string|max:255',
             'city' => 'sometimes|required|string|max:255',

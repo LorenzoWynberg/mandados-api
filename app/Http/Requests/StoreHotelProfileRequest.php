@@ -27,7 +27,7 @@ class StoreHotelProfileRequest extends FormRequest
             'password' => 'required|string|min:6',
             'phone' => 'required|string',
             'avatar' => 'required|url',
-            'sex_id' => 'required|in:male,female,unspecified',
+            'sex_id' => 'required|integer',
             'hotel_name' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'city' => 'required|string|max:255',

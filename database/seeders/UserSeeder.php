@@ -2,21 +2,23 @@
 
 namespace Database\Seeders;
 
+use App\Models\CatalogElement;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
+        /** @var CatalogElement|null $maleSex */
+        $maleSex = CatalogElement::where('code', 'male')->first();
+
         User::factory()->create([
-            'name'  => 'Testing User',
+            'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
-            'phone' => '+506 1234-5678',
-            'sex' => 'male',
+            'sex_id' => $maleSex?->id,
+            'language_code' => 'es',
         ]);
     }
 }
