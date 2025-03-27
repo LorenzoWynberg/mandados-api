@@ -11,31 +11,30 @@ class SetUserLanguage
 {
     public function handle(Request $request, Closure $next): Response
     {
-        // 1. Authenticated user's language takes precedence
-        if ($request->user() && $request->user()->lang_code) {
+        // Dynamically pull supported language codes from catalog (cached)
+        $supportedLanguages = cache()->rememberForever('supported_languages', function () {
+            return Catalog::where('code', 'language')
+                ->first()
+                ?->elements
+                ?->pluck('code')
+                ?->toArray() ?? [];
+        });
+
+        // 1. Authenticated user's language (if valid)
+        if ($request->user() && in_array($request->user()->lang_code, $supportedLanguages)) {
             app()->setLocale($request->user()->lang_code);
         }
-        // 2. Fallback to Accept-Language header
+        // 2. Fallback to Accept-Language header (first 2 chars)
         elseif ($langHeader = $request->header('Accept-Language')) {
             $locale = substr($langHeader, 0, 2);
 
-            // 3. Dynamically pull supported language codes from catalog (cached)
-            $supportedLanguages = cache()->rememberForever('supported_languages', function () {
-                return Catalog::where('code', 'language')
-                    ->first()
-                    ?->elements
-                    ?->pluck('code')
-                    ?->toArray() ?? [];
-            });
-
-            // 4. Use valid language or default to 'es'
             if (in_array($locale, $supportedLanguages)) {
                 app()->setLocale($locale);
             } else {
                 app()->setLocale('es');
             }
         }
-        // 5. Default if no header and no user
+        // 3. Final fallback
         else {
             app()->setLocale('es');
         }
