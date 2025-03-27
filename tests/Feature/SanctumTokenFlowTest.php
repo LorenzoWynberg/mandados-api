@@ -84,7 +84,7 @@ class SanctumTokenFlowTest extends TestCase
     }
 
     /**
-     * Test that the issued token can be used to logout.
+     * Test that the issued token can be used to log out.
      */
     public function test_logout_revokes_token(): void
     {
