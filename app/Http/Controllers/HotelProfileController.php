@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\HotelProfile;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreHotelProfileRequest;
 use App\Http\Requests\UpdateHotelProfileRequest;
+use App\Models\HotelProfile;
+use App\Models\User;
 
 class HotelProfileController extends Controller
 {
@@ -25,6 +24,7 @@ class HotelProfileController extends Controller
     {
         $data = $request->validated();
         $user = User::createAsHotel($data);
+
         return response()->json($user->hotelProfile, 201);
     }
 
@@ -45,7 +45,7 @@ class HotelProfileController extends Controller
         $hotel_profile->updateWithUser($data);
 
         return response()->json([
-            'user'    => $hotel_profile->user,
+            'user' => $hotel_profile->user,
             'profile' => $hotel_profile,
         ]);
     }

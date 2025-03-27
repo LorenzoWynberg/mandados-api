@@ -2,16 +2,14 @@
 
 namespace App\Policies;
 
-use App\Models\User;
-use App\Models\HotelProfile;
-use Illuminate\Auth\Access\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
-
+use App\Models\HotelProfile;
+use App\Models\User;
 
 class HotelProfilePolicy
 {
     use HandlesAuthorization;
-    
+
     /**
      * Determine whether the user can view any models.
      */

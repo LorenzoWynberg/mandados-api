@@ -31,12 +31,12 @@ class StoreDriverProfileRequest extends FormRequest
             'license_number' => [
                 'required',
                 'string',
-                'regex:/^(\d-?\d{4}-?\d{4}|\d{12})$/'
+                'regex:/^(\d-?\d{4}-?\d{4}|\d{12})$/',
             ],
             'license_plate_number' => [
                 'required',
                 'string',
-                'regex:/^[A-Z0-9]{3}-\d{3}$/i'
+                'regex:/^[A-Z0-9]{3}-\d{3}$/i',
             ],
             'license_photo_front' => 'required|url',
             'license_photo_back' => 'required|url',

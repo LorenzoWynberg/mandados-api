@@ -2,10 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\User;
-use App\Models\DriverProfile;
-use Illuminate\Auth\Access\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use App\Models\DriverProfile;
+use App\Models\User;
 
 class DriverProfilePolicy
 {

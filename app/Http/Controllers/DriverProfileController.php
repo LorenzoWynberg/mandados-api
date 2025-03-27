@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\DriverProfile;
 use App\Http\Requests\StoreDriverProfileRequest;
 use App\Http\Requests\UpdateDriverProfileRequest;
+use App\Models\DriverProfile;
+use App\Models\User;
 
 class DriverProfileController extends Controller
 {
@@ -24,6 +24,7 @@ class DriverProfileController extends Controller
     {
         $data = $request->validated();
         $user = User::createAsDriver($data);
+
         return response()->json($user->driverProfile, 201);
     }
 
@@ -44,7 +45,7 @@ class DriverProfileController extends Controller
         $driver_profile->updateWithUser($data);
 
         return response()->json([
-            'user'    => $driver_profile->user,
+            'user' => $driver_profile->user,
             'profile' => $driver_profile,
         ]);
     }

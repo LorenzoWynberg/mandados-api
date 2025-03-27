@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use App\Models\HotelProfile;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\HotelProfile;
+use App\Models\User;
 
 class HotelProfileSeeder extends Seeder
 {

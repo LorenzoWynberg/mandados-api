@@ -22,19 +22,19 @@ class StoreHotelProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'         => 'required|string|max:255',
-            'email'        => 'required|email|unique:users,email',
-            'password'     => 'required|string|min:6',
-            'phone'        => 'required|string',
-            'avatar'       => 'required|url',
-            'sex'          => 'required|in:male,female,unspecified',
-            'hotel_name'   => 'required|string|max:255',
-            'address'      => 'required|string|max:255',
-            'city'         => 'required|string|max:255',
-            'province'     => 'required|string|max:255',
-            'country'      => 'required|string|max:255',
-            'latitude'     => 'required|numeric',
-            'longitude'    => 'required|numeric',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:6',
+            'phone' => 'required|string',
+            'avatar' => 'required|url',
+            'sex_id' => 'required|in:male,female,unspecified',
+            'hotel_name' => 'required|string|max:255',
+            'address' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'province' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
         ];
     }
 }

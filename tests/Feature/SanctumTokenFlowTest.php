@@ -2,10 +2,9 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class SanctumTokenFlowTest extends TestCase
@@ -20,7 +19,7 @@ class SanctumTokenFlowTest extends TestCase
 
         // Create a test user before each test.
         $this->user = User::factory()->create([
-            'name'  => 'Testing User',
+            'name' => 'Testing User',
             'email' => 'test@example.com',
         ]);
     }
@@ -49,8 +48,8 @@ class SanctumTokenFlowTest extends TestCase
     public function test_can_issue_token(): void
     {
         $response = $this->postJson('/api/sanctum/token', [
-            'email'       => 'test@example.com',
-            'password'    => 'password',
+            'email' => 'test@example.com',
+            'password' => 'password',
             'device_name' => 'PHPUnit',
         ]);
 
@@ -66,8 +65,8 @@ class SanctumTokenFlowTest extends TestCase
     {
         // Issue an API token.
         $response = $this->postJson('/api/sanctum/token', [
-            'email'       => 'test@example.com',
-            'password'    => 'password',
+            'email' => 'test@example.com',
+            'password' => 'password',
             'device_name' => 'PHPUnit',
         ]);
 
@@ -75,13 +74,13 @@ class SanctumTokenFlowTest extends TestCase
 
         // Use the issued token to access the protected route.
         $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-            'Accept'        => 'application/json',
+            'Authorization' => 'Bearer '.$token,
+            'Accept' => 'application/json',
         ])->getJson('/api/user')
-          ->assertStatus(200)
-          ->assertJson([
-              'email' => 'test@example.com',
-          ]);
+            ->assertStatus(200)
+            ->assertJson([
+                'email' => 'test@example.com',
+            ]);
     }
 
     /**
@@ -91,8 +90,8 @@ class SanctumTokenFlowTest extends TestCase
     {
         // Issue an API token.
         $response = $this->postJson('/api/sanctum/token', [
-            'email'       => 'test@example.com',
-            'password'    => 'password',
+            'email' => 'test@example.com',
+            'password' => 'password',
             'device_name' => 'PHPUnit',
         ]);
 
@@ -100,22 +99,22 @@ class SanctumTokenFlowTest extends TestCase
 
         // Logout using the token.
         $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-            'Accept'        => 'application/json',
+            'Authorization' => 'Bearer '.$token,
+            'Accept' => 'application/json',
         ])->postJson('/api/sanctum/logout')
-          ->assertStatus(200)
-          ->assertJson([
-              'message' => 'Logged out successfully',
-          ]);
+            ->assertStatus(200)
+            ->assertJson([
+                'message' => 'Logged out successfully',
+            ]);
 
         // Refresh the application so that the authentication context is reset.
         $this->refreshApplication();
 
         // Subsequent request with the same token should be unauthorized.
         $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
-            'Accept'        => 'application/json',
+            'Authorization' => 'Bearer '.$token,
+            'Accept' => 'application/json',
         ])->getJson('/api/user')
-          ->assertStatus(401);
+            ->assertStatus(401);
     }
 }

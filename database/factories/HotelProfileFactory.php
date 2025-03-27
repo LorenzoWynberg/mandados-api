@@ -17,14 +17,14 @@ class HotelProfileFactory extends Factory
     public function definition(): array
     {
         return [
-            'hotel_name' => $this->faker->company . ' Hotel',
-            'address'    => $this->faker->streetAddress,
-            'city'       => $this->faker->city,
-            'province'   => $this->faker->state,
-            'country'    => 'Costa Rica',
-            'latitude'   => $this->faker->latitude(8, 11),
-            'longitude'  => $this->faker->longitude(-85, -82),
-            'active'     => true,
+            'hotel_name' => $this->faker->company.' Hotel',
+            'address' => $this->faker->streetAddress,
+            'city' => $this->faker->city,
+            'province' => $this->faker->state,
+            'country' => 'Costa Rica',
+            'latitude' => $this->faker->latitude(8, 11),
+            'longitude' => $this->faker->longitude(-85, -82),
+            'active' => true,
         ];
     }
 }
