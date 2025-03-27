@@ -17,7 +17,7 @@ class StoreDriverProfileRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
     {
@@ -27,16 +27,16 @@ class StoreDriverProfileRequest extends FormRequest
             'password' => 'required|string|min:6',
             'phone' => 'required|string',
             'avatar' => 'required|url',
-            'sex' => 'required|in:male,female,unspecified',
+            'sex_id' => 'required|integer',
             'license_number' => [
                 'required',
                 'string',
-                'regex:/^(\d-?\d{4}-?\d{4}|\d{12})$/'
+                'regex:/^(\d-?\d{4}-?\d{4}|\d{12})$/',
             ],
             'license_plate_number' => [
                 'required',
                 'string',
-                'regex:/^[A-Z0-9]{3}-\d{3}$/i'
+                'regex:/^[A-Z0-9]{3}-\d{3}$/i',
             ],
             'license_photo_front' => 'required|url',
             'license_photo_back' => 'required|url',

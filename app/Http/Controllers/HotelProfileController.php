@@ -2,14 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\HotelProfile;
-use Illuminate\Http\Request;
-use App\Http\Requests\StoreHotelProfileRequest;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Http\Requests\UpdateHotelProfileRequest;
+use App\Http\Requests\StoreHotelProfileRequest;
+use Illuminate\Routing\Controller;
+use App\Models\HotelProfile;
+use App\Models\User;
 
 class HotelProfileController extends Controller
 {
+    use AuthorizesRequests;
+
+    public function __construct()
+    {
+        //$this->authorizeResource(HotelProfile::class, 'hotel_profile');
+        $this->middleware('auth:sanctum')->except('store');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -25,6 +34,7 @@ class HotelProfileController extends Controller
     {
         $data = $request->validated();
         $user = User::createAsHotel($data);
+
         return response()->json($user->hotelProfile, 201);
     }
 
@@ -45,7 +55,7 @@ class HotelProfileController extends Controller
         $hotel_profile->updateWithUser($data);
 
         return response()->json([
-            'user'    => $hotel_profile->user,
+            'user' => $hotel_profile->user,
             'profile' => $hotel_profile,
         ]);
     }

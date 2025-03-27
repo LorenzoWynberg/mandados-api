@@ -19,7 +19,10 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone');
             $table->string('avatar');
-            $table->enum('sex', ['male', 'female', 'unspecified'])->default('unspecified');
+            $table->string('language_code', 5)->default('es'); // ISO 639-1 codes
+            $table->foreignId('sex_id')
+                ->nullable()
+                ->constrained('catalog_elements');
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

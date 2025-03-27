@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\HotelProfile;
 
 class UpdateHotelProfileRequest extends FormRequest
 {
@@ -18,24 +19,24 @@ class UpdateHotelProfileRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            'name'         => 'sometimes|required|string|max:255',
-            'email'        => 'sometimes|required|email|unique:users,email,' . $this->route('hotel_profile')->id,
-            'password'     => 'sometimes|required|string|min:6',
-            'phone'        => 'sometimes|required|string',
-            'avatar'       => 'sometimes|required|url',
-            'sex'          => 'sometimes|required|in:male,female,unspecified',
-            'hotel_name'   => 'sometimes|required|string|max:255',
-            'address'      => 'sometimes|required|string|max:255',
-            'city'         => 'sometimes|required|string|max:255',
-            'province'     => 'sometimes|required|string|max:255',
-            'country'      => 'sometimes|required|string|max:255',
-            'latitude'     => 'sometimes|required|numeric',
-            'longitude'    => 'sometimes|required|numeric',
+            'name' => 'sometimes|required|string|max:255',
+            'email' => 'sometimes|required|email|unique:users,email,'.$this->route('hotel_profile')->id,
+            'password' => 'sometimes|required|string|min:6',
+            'phone' => 'sometimes|required|string',
+            'avatar' => 'sometimes|required|url',
+            'sex_id' => 'sometimes|required|integer',
+            'hotel_name' => 'sometimes|required|string|max:255',
+            'address' => 'sometimes|required|string|max:255',
+            'city' => 'sometimes|required|string|max:255',
+            'province' => 'sometimes|required|string|max:255',
+            'country' => 'sometimes|required|string|max:255',
+            'latitude' => 'sometimes|required|numeric',
+            'longitude' => 'sometimes|required|numeric',
         ];
     }
 }
