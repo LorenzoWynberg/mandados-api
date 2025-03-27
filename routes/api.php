@@ -34,7 +34,9 @@ Route::post('/sanctum/token', function (Request $request) {
 // Group routes that require Sanctum authentication
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/sanctum/logout', function (Request $request) {
-        $request->user()->currentAccessToken()->delete();
+        /** @var \Laravel\Sanctum\PersonalAccessToken|null $token */
+        $token = $request->user()?->currentAccessToken();
+        $token?->delete();
 
         return response()->json(['message' => 'Logged out successfully']);
     });
