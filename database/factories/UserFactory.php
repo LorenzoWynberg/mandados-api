@@ -33,7 +33,7 @@ class UserFactory extends Factory
             'phone' => $this->faker->numerify('+506 ####-####'),
             'avatar' => $this->faker->imageUrl(150, 150, 'people'),
             'remember_token' => Str::random(10),
-            'language_code' => $this->faker->randomElement(['en', 'es', 'fr']),
+            'lang_code' => $this->faker->randomElement(['en', 'es', 'fr']),
             'sex_id' => CatalogElement::whereHas('catalog', function ($q) {
                 $q->where('code', 'sex');
             })->inRandomOrder()->first()?->id,

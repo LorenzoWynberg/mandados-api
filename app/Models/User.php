@@ -33,7 +33,7 @@ class User extends Authenticatable
         'avatar',
         'remember_token',
         'sex_id',
-        'language_code',
+        'lang_code',
     ];
 
     /**
