@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Catalog;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Symfony\Component\HttpFoundation\Response;
 
 class SetUserLanguage
@@ -12,13 +12,7 @@ class SetUserLanguage
     public function handle(Request $request, Closure $next): Response
     {
         // Dynamically pull supported language codes from catalog (cached)
-        $supportedLanguages = cache()->rememberForever('supported_languages', function () {
-            return Catalog::where('code', 'language')
-                ->first()
-                ?->elements
-                ?->pluck('code')
-                ?->toArray() ?? [];
-        });
+        $supportedLanguages = Cache::get('supported_languages', []);
 
         // 1. Authenticated user's language (if valid)
         if ($request->user() && in_array($request->user()->lang_code, $supportedLanguages)) {

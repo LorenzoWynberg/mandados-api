@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Translatable\HasTranslations;
 
 /**
- * @property array $name
- *
  * @method string getTranslation(string $field, string $locale, bool $fallback = true)
  */
 class Catalog extends Model
@@ -23,9 +21,7 @@ class Catalog extends Model
 
     public array $translatable = ['name', 'description'];
 
-    protected $casts = [
-        'name' => 'array',
-    ];
+    protected $casts = [];
 
     public function elements(): HasMany
     {

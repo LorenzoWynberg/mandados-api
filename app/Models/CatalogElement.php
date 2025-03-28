@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Translatable\HasTranslations;
 
 /**
- * @property array $name
+ * @property-read Catalog|null $catalog
  *
  * @method string getTranslation(string $field, string $locale, bool $fallback = true)
  */
@@ -19,13 +19,12 @@ class CatalogElement extends Model
     use HasTranslations;
     use SoftDeletes;
 
-    protected $fillable = ['catalog_id', 'code', 'name', 'description', 'parent_ids'];
+    protected $fillable = ['catalog_id', 'code', 'name', 'description', 'meta', 'parent_ids'];
 
     public array $translatable = ['name', 'description'];
 
     protected $casts = [
         'parent_ids' => 'array',
-        'name' => 'array',
         'meta' => 'array',
     ];
 
