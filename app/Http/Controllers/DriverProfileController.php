@@ -16,7 +16,10 @@ class DriverProfileController extends Controller
 
     public function __construct()
     {
-        // $this->authorizeResource(DriverProfile::class, 'driver_profile');
+        /**
+         * TODO: make sure i can use the policy here
+         * $this->authorizeResource(DriverProfile::class, 'driver_profile');
+         */
         $this->middleware('auth:sanctum')->except('store');
     }
 

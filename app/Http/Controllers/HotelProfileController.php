@@ -16,7 +16,10 @@ class HotelProfileController extends Controller
 
     public function __construct()
     {
-        // $this->authorizeResource(HotelProfile::class, 'hotel_profile');
+        /**
+         * TODO: make sure i can use the policy here
+         * $this->authorizeResource(HotelProfile::class, 'hotel_profile');
+         */
         $this->middleware('auth:sanctum')->except('store');
     }
 
