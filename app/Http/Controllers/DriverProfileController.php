@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use App\Http\Requests\UpdateDriverProfileRequest;
 use App\Http\Requests\StoreDriverProfileRequest;
-use Illuminate\Routing\Controller;
+use App\Http\Requests\UpdateDriverProfileRequest;
 use App\Models\DriverProfile;
 use App\Models\User;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controller;
 
 class DriverProfileController extends Controller
 {
@@ -15,14 +16,14 @@ class DriverProfileController extends Controller
 
     public function __construct()
     {
-        //$this->authorizeResource(DriverProfile::class, 'driver_profile');
+        // $this->authorizeResource(DriverProfile::class, 'driver_profile');
         $this->middleware('auth:sanctum')->except('store');
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): JsonResponse
     {
         return response()->json(DriverProfile::all());
     }
@@ -30,7 +31,7 @@ class DriverProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreDriverProfileRequest $request)
+    public function store(StoreDriverProfileRequest $request): JsonResponse
     {
         $data = $request->validated();
         $user = User::createAsDriver($data);
@@ -41,7 +42,7 @@ class DriverProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(DriverProfile $driver_profile)
+    public function show(DriverProfile $driver_profile): JsonResponse
     {
         return response()->json($driver_profile);
     }
@@ -49,7 +50,7 @@ class DriverProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateDriverProfileRequest $request, DriverProfile $driver_profile)
+    public function update(UpdateDriverProfileRequest $request, DriverProfile $driver_profile): JsonResponse
     {
         $data = $request->validated();
         $driver_profile->updateWithUser($data);
@@ -63,7 +64,7 @@ class DriverProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DriverProfile $driver_profile)
+    public function destroy(DriverProfile $driver_profile): JsonResponse
     {
         $driver_profile->update(['active' => false]);
         $driver_profile->delete();

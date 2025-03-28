@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
             'sex_id' => $maleSex?->id,
-            'language_code' => 'es',
+            'lang_code' => 'es',
         ]);
     }
 }

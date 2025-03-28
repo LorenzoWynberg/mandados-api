@@ -2,27 +2,27 @@
 
 namespace App\Http\Requests;
 
+use App\Models\CatalogElement;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Models\CatalogElement;
 
 class UpdateCatalogElementRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
+    public function authorize(): ?bool
     {
-        return request()->user()->can('update', CatalogElement::class);
+        return $this->user()?->can('update', CatalogElement::class);
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
+        $param_id = getRouteParamId('catalog_element');
+
         return [
             'id' => [
                 'required',
@@ -39,7 +39,7 @@ class UpdateCatalogElementRequest extends FormRequest
                 'string',
                 'max:255',
                 Rule::unique('catalog_elements', 'code')
-                    ->ignore(request()->route('catalog_element')->id)
+                    ->ignore($param_id)
                     ->where('catalog_id', request('catalog_id')),
             ],
             'name' => 'sometimes|array',

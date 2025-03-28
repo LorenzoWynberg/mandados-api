@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\CatalogElement;
 use App\Models\Catalog;
+use App\Models\CatalogElement;
+use Illuminate\Database\Seeder;
 
 class CatalogSeeder extends Seeder
 {

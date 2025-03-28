@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Database\Seeders\RolesAndPermissionsSeeder;
-use App\Models\CatalogElement;
 use App\Models\Catalog;
+use App\Models\CatalogElement;
 use App\Models\User;
+use Database\Seeders\RolesAndPermissionsSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CatalogTest extends TestCase
@@ -40,13 +40,13 @@ class CatalogTest extends TestCase
             'name' => ['en' => 'Male', 'es' => 'Masculino', 'fr' => 'Masculin'],
         ]);
 
-        $response = $this->getJson("/api/catalogs/sex/elements");
+        $response = $this->getJson('/api/catalogs/sex/elements');
         $response->assertOk()->assertJsonFragment(['code' => 'male']);
     }
 
     public function test_cannot_access_nonexistent_catalog(): void
     {
-        $response = $this->getJson("/api/catalogs/fake_catalog/elements");
+        $response = $this->getJson('/api/catalogs/fake_catalog/elements');
         $response->assertNotFound();
     }
 
@@ -71,7 +71,7 @@ class CatalogTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
 
-        $response = $this->getJson("/api/catalogs/sex/elements");
+        $response = $this->getJson('/api/catalogs/sex/elements');
         $response->assertForbidden();
     }
 

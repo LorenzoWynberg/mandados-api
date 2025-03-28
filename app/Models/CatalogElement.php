@@ -3,28 +3,28 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Translatable\HasTranslations;
-use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property array $name
+ * @property-read Catalog|null $catalog
+ *
  * @method string getTranslation(string $field, string $locale, bool $fallback = true)
  */
 class CatalogElement extends Model
 {
+    use HasFactory;
     use HasTranslations;
     use SoftDeletes;
-    use HasFactory;
 
-    protected $fillable = ['catalog_id', 'code', 'name', 'description', 'parent_ids'];
+    protected $fillable = ['catalog_id', 'code', 'name', 'description', 'meta', 'parent_ids'];
 
     public array $translatable = ['name', 'description'];
 
     protected $casts = [
         'parent_ids' => 'array',
-        'name' => 'array',
         'meta' => 'array',
     ];
 

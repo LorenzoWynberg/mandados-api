@@ -2,22 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Traits\HasRoles;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use HasApiTokens;
-    use SoftDeletes;
     use HasFactory;
-    use Notifiable;
     use HasRoles;
+    use Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -33,7 +33,7 @@ class User extends Authenticatable
         'avatar',
         'remember_token',
         'sex_id',
-        'language_code',
+        'lang_code',
     ];
 
     /**
@@ -78,7 +78,6 @@ class User extends Authenticatable
      * Create a new user as a driver along with its associated driver profile.
      *
      * @param  array  $data  Validated data from the request.
-     * @return static
      */
     public static function createAsDriver(array $data): self
     {
@@ -110,7 +109,6 @@ class User extends Authenticatable
      * Create a new user as a hotel along with its associated hotel profile.
      *
      * @param  array  $data  Validated data from the request.
-     * @return static
      */
     public static function createAsHotel(array $data): self
     {

@@ -2,10 +2,10 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Database\Seeders\CatalogSeeder;
-use App\Models\CatalogElement;
 use App\Models\Catalog;
+use App\Models\CatalogElement;
+use Database\Seeders\CatalogSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CatalogSeederTest extends TestCase

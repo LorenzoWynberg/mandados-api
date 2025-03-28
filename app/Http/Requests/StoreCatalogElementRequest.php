@@ -2,27 +2,31 @@
 
 namespace App\Http\Requests;
 
+use App\Models\CatalogElement;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Models\CatalogElement;
 
 class StoreCatalogElementRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
+    public function authorize(): ?bool
     {
-        return $this->user()->can('create', CatalogElement::class);
+        return $this->user()?->can('create', CatalogElement::class);
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
     {
+        $catalog_id = $this->input('catalog_id');
+        if (! is_numeric($catalog_id)) {
+            throw new \InvalidArgumentException('catalog_id must be numeric');
+        }
+        $catalog_id = (int) $catalog_id;
+
         return [
             'catalog_id' => [
                 'required',
@@ -34,7 +38,7 @@ class StoreCatalogElementRequest extends FormRequest
                 'string',
                 'max:255',
                 Rule::unique('catalog_elements', 'code')
-                    ->where('catalog_id', $this->input('catalog_id')),
+                    ->where('catalog_id', $catalog_id),
             ],
             'name' => 'required|array',
             'name.en' => 'required|string|max:255',

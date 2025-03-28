@@ -2,30 +2,31 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Models\HotelProfile;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateHotelProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
+    public function authorize(): ?bool
     {
         $hotelProfile = HotelProfile::find($this->route('hotel_profile'));
-        return $hotelProfile && $this->user()->can('update', $hotelProfile);
+
+        return $hotelProfile && $this->user()?->can('update', $hotelProfile);
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
     {
+        $param_id = getRouteParamId('catalog_element');
+
         return [
             'name' => 'sometimes|required|string|max:255',
-            'email' => 'sometimes|required|email|unique:users,email,'.$this->route('hotel_profile')->id,
+            'email' => 'sometimes|required|email|unique:users,email,'.$param_id,
             'password' => 'sometimes|required|string|min:6',
             'phone' => 'sometimes|required|string',
             'avatar' => 'sometimes|required|url',
