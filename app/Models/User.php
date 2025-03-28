@@ -78,7 +78,6 @@ class User extends Authenticatable
      * Create a new user as a driver along with its associated driver profile.
      *
      * @param  array  $data  Validated data from the request.
-     * @return static
      */
     public static function createAsDriver(array $data): self
     {
@@ -110,7 +109,6 @@ class User extends Authenticatable
      * Create a new user as a hotel along with its associated hotel profile.
      *
      * @param  array  $data  Validated data from the request.
-     * @return static
      */
     public static function createAsHotel(array $data): self
     {

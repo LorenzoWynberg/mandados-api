@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateHotelProfileRequest;
 use App\Models\HotelProfile;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 
 class HotelProfileController extends Controller
@@ -22,7 +23,7 @@ class HotelProfileController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): JsonResponse
     {
         return response()->json(HotelProfile::all());
     }
@@ -30,7 +31,7 @@ class HotelProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreHotelProfileRequest $request)
+    public function store(StoreHotelProfileRequest $request): JsonResponse
     {
         $data = $request->validated();
         $user = User::createAsHotel($data);
@@ -41,7 +42,7 @@ class HotelProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(HotelProfile $hotel_profile)
+    public function show(HotelProfile $hotel_profile): JsonResponse
     {
         return response()->json($hotel_profile);
     }
@@ -49,7 +50,7 @@ class HotelProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateHotelProfileRequest $request, HotelProfile $hotel_profile)
+    public function update(UpdateHotelProfileRequest $request, HotelProfile $hotel_profile): JsonResponse
     {
         $data = $request->validated();
         $hotel_profile->updateWithUser($data);
@@ -63,7 +64,7 @@ class HotelProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(HotelProfile $hotel_profile)
+    public function destroy(HotelProfile $hotel_profile): JsonResponse
     {
         $hotel_profile->update(['active' => false]);
         $hotel_profile->delete();

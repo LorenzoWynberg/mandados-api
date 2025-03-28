@@ -10,23 +10,23 @@ class UpdateDriverProfileRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
+    public function authorize(): ?bool
     {
         $driverProfile = DriverProfile::find($this->route('driver_profile'));
 
-        return $driverProfile && $this->user()->can('update', $driverProfile);
+        return $driverProfile && $this->user()?->can('update', $driverProfile);
     }
 
     /**
      * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
     {
+        $param_id = getRouteParamId('driver_profile');
+
         return [
             'name' => 'sometimes|required|string|max:255',
-            'email' => 'sometimes|required|email|unique:users,email,'.$this->route('driver_profile')->id,
+            'email' => 'sometimes|required|email|unique:users,email,'.$param_id,
             'password' => 'sometimes|required|string|min:6',
             'phone' => 'sometimes|required|string',
             'avatar' => 'sometimes|required|url',

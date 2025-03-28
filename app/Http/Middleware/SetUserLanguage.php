@@ -39,6 +39,12 @@ class SetUserLanguage
             app()->setLocale('es');
         }
 
-        return $next($request);
+        $response = $next($request);
+
+        if (! $response instanceof Response) {
+            throw new \RuntimeException('Middleware did not return a Response instance.');
+        }
+
+        return $response;
     }
 }
