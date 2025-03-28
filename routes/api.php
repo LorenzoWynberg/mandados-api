@@ -38,6 +38,9 @@ Route::get('/get-locale', function () {
 Route::post('/driver_profiles', [DriverProfileController::class, 'store']);
 Route::post('/hotel_profiles', [HotelProfileController::class, 'store']);
 
+//Catalogs public route
+Route::get('catalogs/{code}/elements', [CatalogElementController::class, 'getByCatalogCode']);
+
 // Group routes that require Sanctum authentication
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/sanctum/logout', function (Request $request) {
@@ -60,5 +63,4 @@ Route::middleware('auth:sanctum')->group(function () {
     // Catalogs
     Route::apiResource('catalogs', CatalogController::class);
     Route::apiResource('catalog-elements', CatalogElementController::class);
-    Route::get('catalogs/{code}/elements', [CatalogElementController::class, 'getByCatalogCode']);
 });
