@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Models\HotelProfile;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateHotelProfileRequest extends FormRequest
 {
@@ -13,6 +13,7 @@ class UpdateHotelProfileRequest extends FormRequest
     public function authorize(): bool
     {
         $hotelProfile = HotelProfile::find($this->route('hotel_profile'));
+
         return $hotelProfile && $this->user()->can('update', $hotelProfile);
     }
 

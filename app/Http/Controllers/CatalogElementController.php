@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use App\Http\Requests\UpdateCatalogElementRequest;
 use App\Http\Requests\StoreCatalogElementRequest;
-use Illuminate\Routing\Controller;
-use Illuminate\Http\JsonResponse;
-use App\Models\CatalogElement;
-use Illuminate\Http\Request;
+use App\Http\Requests\UpdateCatalogElementRequest;
 use App\Models\Catalog;
+use App\Models\CatalogElement;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class CatalogElementController extends Controller
 {

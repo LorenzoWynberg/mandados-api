@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Models\CatalogElement;
 use App\Models\Catalog;
+use App\Models\CatalogElement;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CatalogTest extends TestCase

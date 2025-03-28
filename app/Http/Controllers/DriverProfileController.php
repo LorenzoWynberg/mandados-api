@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use App\Http\Requests\UpdateDriverProfileRequest;
 use App\Http\Requests\StoreDriverProfileRequest;
-use Illuminate\Routing\Controller;
+use App\Http\Requests\UpdateDriverProfileRequest;
 use App\Models\DriverProfile;
 use App\Models\User;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Routing\Controller;
 
 class DriverProfileController extends Controller
 {
@@ -15,7 +15,7 @@ class DriverProfileController extends Controller
 
     public function __construct()
     {
-        //$this->authorizeResource(DriverProfile::class, 'driver_profile');
+        // $this->authorizeResource(DriverProfile::class, 'driver_profile');
         $this->middleware('auth:sanctum')->except('store');
     }
 

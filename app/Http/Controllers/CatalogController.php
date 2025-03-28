@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use App\Http\Requests\UpdateCatalogRequest;
 use App\Http\Requests\StoreCatalogRequest;
-use Illuminate\Routing\Controller;
-use Illuminate\Http\JsonResponse;
+use App\Http\Requests\UpdateCatalogRequest;
 use App\Models\Catalog;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controller;
 
 class CatalogController extends Controller
 {

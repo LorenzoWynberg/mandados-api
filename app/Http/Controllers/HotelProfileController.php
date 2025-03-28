@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use App\Http\Requests\UpdateHotelProfileRequest;
 use App\Http\Requests\StoreHotelProfileRequest;
-use Illuminate\Routing\Controller;
+use App\Http\Requests\UpdateHotelProfileRequest;
 use App\Models\HotelProfile;
 use App\Models\User;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Routing\Controller;
 
 class HotelProfileController extends Controller
 {
@@ -15,7 +15,7 @@ class HotelProfileController extends Controller
 
     public function __construct()
     {
-        //$this->authorizeResource(HotelProfile::class, 'hotel_profile');
+        // $this->authorizeResource(HotelProfile::class, 'hotel_profile');
         $this->middleware('auth:sanctum')->except('store');
     }
 

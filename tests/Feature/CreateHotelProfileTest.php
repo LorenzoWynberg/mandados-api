@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Database\Seeders\RolesAndPermissionsSeeder;
-use Database\Seeders\CatalogSeeder;
 use App\Models\CatalogElement;
 use App\Models\User;
+use Database\Seeders\CatalogSeeder;
+use Database\Seeders\RolesAndPermissionsSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class CreateHotelProfileTest extends TestCase

@@ -2,9 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Catalog;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Catalog;
 
 class CatalogFactory extends Factory
 {
